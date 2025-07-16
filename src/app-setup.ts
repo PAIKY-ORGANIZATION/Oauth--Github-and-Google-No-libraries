@@ -1,7 +1,7 @@
 import './bootstrap.js' // This  needs to be imported at the top in order for environment variables to be loaded successfully.
 
 import express, { RequestHandler} from 'express';
-import { router as usersRouter } from './routes/users-router.js';
+import { router as usersRouter } from './routes/auth-router.js';
 import { router as loggerRouter } from './routes/logger-router.js';
 import {reqLogger} from 'req-logger-express'
 import {errorMiddleware} from 'custom-exceptions-express'
