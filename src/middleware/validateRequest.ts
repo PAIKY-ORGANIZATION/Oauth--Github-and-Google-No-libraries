@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { AnyZodObject, ZodError } from 'zod';
 import { AppError, InternalException, UnprocessableEntity } from 'custom-exceptions-express';
-
+import {AxiosError} from 'axios';  
 //prettier-ignore
 type ControllerFunction = (req: Request<any>, res: Response,next: NextFunction) => Promise<void>;
 
@@ -38,7 +38,6 @@ export const validate = (controller: ControllerFunction, schema?: AnyZodObject, 
 				//* Jul-15-2025 - Here I just join by a comma for the message to be only a string.
 				// exception = new UnprocessableEntity(errorMessages.join(', '));
 			} 
-
             else {
 				exception = new InternalException('Internal server error', (e as any).message);
 			}
