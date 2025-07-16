@@ -7,7 +7,7 @@ export const googleCallback = async(req: Request, res: Response)=>{
 
 
 
-    
+
     const tokenResponse = await axios.post(`https://oauth2.googleapis.com/token`, {
         code,
         client_id: process.env.GOOGLE_CLIENT_ID,
@@ -26,5 +26,5 @@ export const googleCallback = async(req: Request, res: Response)=>{
 
 
     console.log(userResponse.data)
-    res.send(userResponse.data)
+    res.send('Success')
 }
