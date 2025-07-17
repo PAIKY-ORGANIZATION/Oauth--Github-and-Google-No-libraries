@@ -5,7 +5,7 @@ import { Unauthorized } from 'custom-exceptions-express';
 import { decrypt } from '../../lib/encrypt.js';
 import { getGithubUserData } from '../../lib/oauth/get-github-user-data.js';
 
-export const getPermittedUserData = async(req: Request, res: Response)=>{
+export const getUserDataWithStoredToken = async(req: Request, res: Response)=>{
     const {userId} = (req as any).userId //$ Assuming that authorization middleware was successful.
 
     const user = await getUserById(userId)

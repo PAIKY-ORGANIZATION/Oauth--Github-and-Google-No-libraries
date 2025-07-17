@@ -5,7 +5,7 @@ import { redirectToGithub } from "../controllers/github-auth/redirect-to-github.
 import { redirectToGoogle } from "../controllers/google-auth/redirect-to-google.js";
 import { googleCallback } from "../controllers/google-auth/google-callback.js";
 import { authorization } from "../middleware/authorization.js";
-import { getPermittedUserData } from "../controllers/github-auth/get-permitted-user-data.js";
+import { getUserDataWithStoredToken } from "../controllers/github-auth/get-user-data-with-stored-token.js";
 //*types:
 
 
@@ -17,7 +17,7 @@ export const router = Router();
 //* Github:
 router.get('/auth/github', validate(redirectToGithub))
 router.get('/auth/github/callback', validate(githubCallback) )
-router.get('/users/get-permitted-user-data', authorization, validate(getPermittedUserData))
+router.get('/users/get-user-data-with-stored-token', authorization, validate(getUserDataWithStoredToken))
 
 
 
