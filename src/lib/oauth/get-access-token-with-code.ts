@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const getGithubAccessToken = async(code: string)=>{
+export const getGithubAccessTokenByCode = async(code: string)=>{
 
 	const response = await axios.post<{ access_token: string }>(
 		'https://github.com/login/oauth/access_token',

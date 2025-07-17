@@ -1,48 +1,9 @@
 //% This file focuses on using decryption to reuse the encrypted authorization token to refetch user data from GitHub.
-
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-//¡ TRY THIS
-
 import { Request, Response } from 'express';
 import { getUserById } from '../../lib/prisma/get-user-by-id.js';
 import { Unauthorized } from 'custom-exceptions-express';
 import { decrypt } from '../../lib/encrypt.js';
+import { getGithubUserData } from '../../lib/oauth/get-github-user-data.js';
 
 export const getPermittedUserData = async(req: Request, res: Response)=>{
     const {userId} = (req as any).userId //$ Assuming that authorization middleware was successful.
@@ -55,6 +16,14 @@ export const getPermittedUserData = async(req: Request, res: Response)=>{
 
     const decryptedAccessToken = decrypt(user.encryptedOauthAccessToken, user.encryptedOauthAccessTokenIv!)
 
-    res.send(decryptedAccessToken)
+    const userData = await getGithubUserData(decryptedAccessToken)
+
+    const response: ServerResponse = {
+        message: 'User data fetched successfully',
+        success: true,
+        data: userData
+    }
+
+    res.send(response)
 
 }

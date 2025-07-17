@@ -4,7 +4,7 @@ import { BadRequest } from 'custom-exceptions-express';
 import { storeUser } from '../../lib/prisma/store-oauth-user.js';
 import { encrypt } from '../../lib/encrypt.js';
 import { generateJwtAndAddToResponse } from '../../lib/jwt-cookies.js';
-import { getGithubAccessToken } from '../../lib/oauth/get-access-token-with-code.js';
+import { getGithubAccessTokenByCode } from '../../lib/oauth/get-access-token-with-code.js';
 
 export const githubCallback = async (req: Request, res: Response) => {
 
@@ -13,7 +13,7 @@ export const githubCallback = async (req: Request, res: Response) => {
 	if(!code)throw new BadRequest('Missing Github code') 
 
 	//* Get the access token with the code
-	const accessToken  = await getGithubAccessToken(code)
+	const accessToken  = await getGithubAccessTokenByCode(code)
 
 
 	//* Send the access token to get the user data in exchange.
