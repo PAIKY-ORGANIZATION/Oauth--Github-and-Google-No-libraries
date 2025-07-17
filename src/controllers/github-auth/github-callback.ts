@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getGithubUserDataByToken } from '../../lib/oauth/github/get-github-user-data.js';
 import { getGithubAccessTokenByCode } from '../../lib/oauth/github/get-access-token-with-code.js';
-import { sharedOauthCallbackController } from '../shared-oauth-callback-controller.js';
+import { sharedOauthCallbackController } from '../oauth-shared/shared-oauth-callback-controller.js';
 
 //% In this controller:
 //% 1. We get the code from GitHub

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getGoogleAccessTokenByCode } from '../../lib/oauth/google/get-access-token-with-code.js';
 import { getGoogleUserDataByToken } from '../../lib/oauth/google/get-google-user-data.js';
-import { sharedOauthCallbackController } from '../shared-oauth-callback-controller.js';
+import { sharedOauthCallbackController } from '../oauth-shared/shared-oauth-callback-controller.js';
 
 //% In this controller:
 //% 1. We get the code from Google

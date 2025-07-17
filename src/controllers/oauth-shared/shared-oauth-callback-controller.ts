@@ -1,6 +1,6 @@
-import { storeUser } from '../lib/prisma/store-oauth-user.js';
-import { encrypt } from '../lib/encrypt.js';
-import { generateJwtAndAddToResponse } from '../lib/jwt-cookies.js';
+import { storeUser } from '../../lib/prisma/store-oauth-user.js';
+import { encrypt } from '../../lib/encrypt.js';
+import { generateJwtAndAddToResponse } from '../../lib/jwt-cookies.js';
 import { Request, Response } from 'express';
 import { BadRequest } from 'custom-exceptions-express';
 
