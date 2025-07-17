@@ -64,6 +64,13 @@ type GoogleUserResponse = {
 };
 
 
-
+type UserReturnedByTokenUse = {
+	username: string
+	email: string
+	isVerifiedEmail: boolean
+	fullName: string | null
+	imageURL?: string
+	oauthProviderId: string
+}
 
 

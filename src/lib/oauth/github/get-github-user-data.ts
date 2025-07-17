@@ -32,7 +32,10 @@ export const getGithubUserDataByToken = async(access_token: string)=>{
 
     if(!email) throw new BadRequest('No email found')
 
-    const user = { //* we use this specific structure so that it is compatible with Prisma "storeUser()" 
+
+        
+        
+    const user: UserReturnedByTokenUse = { //* we use this specific structure so that it is compatible with Prisma "storeUser()" 
         username: userData.login,
         email,
         isVerifiedEmail,
@@ -41,7 +44,7 @@ export const getGithubUserDataByToken = async(access_token: string)=>{
         oauthProviderId: userData.id.toString() //$  Prisma needs a string when storing a long integer (Google long ones, not Github ones) | Can't use Bigints
     }
 
-    return {user, access_token}
+    return user
 }
 
 
