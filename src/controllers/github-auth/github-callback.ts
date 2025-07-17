@@ -11,23 +11,18 @@ export const githubCallback = async (req: Request, res: Response) => {
 	const code = req.query.code; //$ this code can only be used once.
 	if(!code)throw new BadRequest('Missing Github code') 
 
-
 	//@ts-ignore
 	//* Send the code to GitHub to get the access token and then use the access token to get the user data in exchange.
 	const {access_token, user} = await getGithubUserData(code) //! TYPE ERROR HERE
 	
-	console.log({access_token});
-	
-
 	//* Encrypt the access token
-	const encryptedOauthAccessToken = encrypt(access_token)
-
-	console.log({encryptedOauthAccessToken});
+	const {encrypted: encryptedOauthAccessToken, iv: encryptedOauthAccessTokenIv} = encrypt(access_token)
 	
 
 	//* Store the user in Prisma
 	const savedUser = await storeUser({
 		encryptedOauthAccessToken,
+		encryptedOauthAccessTokenIv,
 		oauthProvider: 'github',
 		...user
 	})

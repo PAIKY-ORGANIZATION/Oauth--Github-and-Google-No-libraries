@@ -5,11 +5,11 @@ import { router as usersRouter } from './routes/auth-router.js';
 import { router as loggerRouter } from './routes/logger-router.js';
 import {reqLogger} from 'req-logger-express'
 import {errorMiddleware} from 'custom-exceptions-express'
-import cookiParser from 'cookie-parser'
+import cookieParser from 'cookie-parser'
 
 const app = express();
 app.use(express.json());
-app.use(cookiParser())
+app.use(cookieParser())
 
 //Custom middleware
 app.use(reqLogger as RequestHandler)

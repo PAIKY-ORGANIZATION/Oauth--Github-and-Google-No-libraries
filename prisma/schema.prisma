@@ -22,6 +22,7 @@ model User {
     oauthProviderId Int? @map("oauth_provider_id") //$ Example: Github ID, Google ID
     email           String?
 	encryptedOauthAccessToken String? @map("encrypted_oauth_access_token") // We might need this even though we already have email. username, etc. Maybe for updates, getting user's repos, etc.
+    encryptedOauthAccessTokenIv String? @map("encrypted_oauth_access_token_iv")
     fullName String? @map("full_name")
     imageURL String? @map("image_url")
 }

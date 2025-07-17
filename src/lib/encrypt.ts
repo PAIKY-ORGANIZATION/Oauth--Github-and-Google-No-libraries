@@ -1,22 +1,25 @@
 
-import { createCipheriv, randomBytes, createDecipheriv } from 'node:crypto'
+import { createCipheriv, createDecipheriv } from 'node:crypto'
+
+
 
 
 const key = Buffer.from(process.env.ENCRYPTION_KEY!, 'hex')
 
-// const iv = randomBytes(16)
+//% The initialization vector (IV) must be random, per-encryption-unique and can be public.
+//% It ensures that the same plaintext will always produce different ciphertexts, avoiding "guessing" because of repetitive patterns.
+//% it's usually publicly sent along with encrypted communication; In this case we will store it in the database.
 
-const iv =  Buffer.from('A1B2C3D4E5F6G7H8', 'utf-8') //¡ We're not supposed to do this, neither what we did above. Supposed to store a random 4 for each access token that we save for it to persist across requests.
+const iv =  Buffer.from('A1B2C3D4E5F6G7H8', 'utf-8')
 
 export const encrypt = (authToken: string)=>{
 
-    
-    
+
     const cipher = createCipheriv('aes-256-cbc', key, iv)
 
     const encrypted = cipher.update(authToken, 'utf-8', 'hex') + cipher.final('hex')
 
-    return encrypted 
+    return {encrypted, iv: iv.toString('hex')} 
 }
 
 
