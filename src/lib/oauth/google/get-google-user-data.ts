@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { email } from 'zod/v4'
 
 export const getGoogleUserDataByToken = async(accessToken: string)=>{
 
@@ -16,8 +15,7 @@ export const getGoogleUserDataByToken = async(accessToken: string)=>{
         isVerifiedEmail: data.verified_email, //* Boolean
         imageURL: data.picture,
         fullName: data.name,
-        oauthProviderId: Number(data.id)
-
+        oauthProviderId: data.id
     }
     
 

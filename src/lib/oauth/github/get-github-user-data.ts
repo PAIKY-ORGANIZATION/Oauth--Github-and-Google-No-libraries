@@ -38,7 +38,7 @@ export const getGithubUserDataByToken = async(access_token: string)=>{
         isVerifiedEmail,
         imageURL: userData.avatar_url,
         fullName: userData.name,
-        oauthProviderId: userData.id
+        oauthProviderId: userData.id.toString() //$  Prisma needs a string when storing a long integer (Google long ones, not Github ones) | Can't use Bigints
     }
 
     return {user, access_token}

@@ -6,7 +6,7 @@ import { prisma } from './prisma-client.js';
 type User = {
 	username: string;
 	oauthProvider: string;
-	oauthProviderId: number;
+	oauthProviderId: string; //$  Prisma needs a string when storing a long integer (Google long ones, not Github ones) | Can't use Bigints
 	email: string;
 	isVerifiedEmail: boolean;
 	encryptedOauthAccessToken: string;
@@ -17,12 +17,12 @@ type User = {
 
 
 // prettier-ignore
-export const storeUser = async ({ username, oauthProvider, oauthProviderId, email, encryptedOauthAccessToken, encryptedOauthAccessTokenIv, fullName, imageURL, } : User) => {
+export const storeUser = async ({ username, oauthProvider, oauthProviderId, email, isVerifiedEmail, encryptedOauthAccessToken, encryptedOauthAccessTokenIv, fullName, imageURL, } : User) => {
 
 	//% Reject cases where either the email already exists or the Github/Google Account ID already exist.
 	const existingUser = await prisma.user.findFirst({
 		where: {
-			OR: [{email}, {oauthProviderId}]
+			OR: [{email}, {oauthProviderId}]  //$  Prisma needs a string when storing a long integer (Google long ones, not Github ones) | Can't use Bigints
 		}
 	})
 
@@ -33,8 +33,9 @@ export const storeUser = async ({ username, oauthProvider, oauthProviderId, emai
 		data: { 
 			username,
 			oauthProvider,
-			oauthProviderId,
+			oauthProviderId: oauthProviderId,  //$  Prisma needs a string when storing a long integer (Google long ones, not Github ones) | Can't use Bigints
 			email,
+			isVerifiedEmail,
 			encryptedOauthAccessToken,
 			encryptedOauthAccessTokenIv,
 			fullName,
