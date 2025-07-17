@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { getUserById } from '../../lib/prisma/get-user-by-id.js';
 import { Unauthorized } from 'custom-exceptions-express';
 import { decrypt } from '../../lib/encrypt.js';
-import { getGithubUserData } from '../../lib/oauth/github/get-github-user-data.js';
+import { getGithubUserDataByToken } from '../../lib/oauth/github/get-github-user-data.js';
 
 export const getUserDataWithStoredToken = async(req: Request, res: Response)=>{
     const {userId} = (req as any).userId //$ Assuming that authorization middleware was successful.
@@ -16,7 +16,7 @@ export const getUserDataWithStoredToken = async(req: Request, res: Response)=>{
 
     const decryptedAccessToken = decrypt(user.encryptedOauthAccessToken, user.encryptedOauthAccessTokenIv!)
 
-    const userData = await getGithubUserData(decryptedAccessToken)
+    const userData = await getGithubUserDataByToken(decryptedAccessToken)
 
     const response: ServerResponse = {
         message: 'User data fetched successfully',

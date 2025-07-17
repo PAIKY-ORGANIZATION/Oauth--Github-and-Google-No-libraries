@@ -1,30 +1,24 @@
 import { Request, Response } from 'express';
 import axios from 'axios'
+import { getGoogleAccessTokenByCode } from '../../lib/oauth/google/get-access-token-with-code.js';
+import { BadRequest } from 'custom-exceptions-express';
+import { getGoogleUserDataByToken } from '../../lib/oauth/google/get-google-user-data.js';
 export const googleCallback = async(req: Request, res: Response)=>{
-    const {code} = req.query
 
-    const redirectUri = "http://localhost:3001/api/auth/google/callback"
-
-    //* ========================================  Get the access token    ===========================================
-
-    const tokenResponse = await axios.post(`https://oauth2.googleapis.com/token`, {
-        code,
-        client_id: process.env.GOOGLE_CLIENT_ID,
-        client_secret: process.env.GOOGLE_CLIENT_SECRET,
-        redirect_uri: redirectUri,
-        grant_type: "authorization_code"
-    })
-    
-    const {access_token} = tokenResponse.data
-
-    //* =============================  With the access token, get the user data    ==================================
-    
-    const userResponse = await axios.get('https://www.googleapis.com/oauth2/v2/userinfo', {
-        headers: {
-            Authorization: 'Bearer ' + access_token
-        }
-    })
+    const code = req.query.code?.toString(); //$ this code can only be used once.
+    if(!code)throw new BadRequest('Missing Github code') 
 
 
-    res.send(userResponse.data)
+    const accessToken = await getGoogleAccessTokenByCode(code)
+
+
+    const userData = await getGoogleUserDataByToken(accessToken)    
+   
+    const response: ServerResponse = {
+        message: 'User data fetched successfully',
+        success: true,
+        data: userData
+    }
+
+    res.send(response)
 }

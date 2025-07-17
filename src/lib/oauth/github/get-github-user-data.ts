@@ -3,7 +3,7 @@ import { BadRequest } from 'custom-exceptions-express';
 
 
 
-export const getGithubUserData = async(access_token: string)=>{
+export const getGithubUserDataByToken = async(access_token: string)=>{
 
     
     //* =============================  With the access token, get the user data    ==================================

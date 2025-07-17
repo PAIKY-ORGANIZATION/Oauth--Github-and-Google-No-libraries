@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getGithubUserData } from '../../lib/oauth/github/get-github-user-data.js';
+import { getGithubUserDataByToken } from '../../lib/oauth/github/get-github-user-data.js';
 import { BadRequest } from 'custom-exceptions-express';
 import { storeUser } from '../../lib/prisma/store-oauth-user.js';
 import { encrypt } from '../../lib/encrypt.js';
@@ -27,7 +27,7 @@ export const githubCallback = async (req: Request, res: Response) => {
 
 
 	//* Send the access token to get the user data in exchange.
-	const {access_token, user} = await getGithubUserData(accessToken) 
+	const {access_token, user} = await getGithubUserDataByToken(accessToken) 
 	
 	//* Encrypt the access token before storing it
 	const {encrypted: encryptedOauthAccessToken, iv: encryptedOauthAccessTokenIv} = encrypt(access_token)

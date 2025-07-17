@@ -6,4 +6,6 @@ export const redirectToGithub = async(_req: Request, res: Response)=>{
     const clientId = process.env.GITHUB_CLIENT_ID
     const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user:email`
     res.redirect(url)
+
+    //% Set "scope=user:email" to receive both the user and email information.
 }
