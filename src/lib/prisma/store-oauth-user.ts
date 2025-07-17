@@ -8,6 +8,7 @@ type User = {
 	oauthProvider: string;
 	oauthProviderId: number;
 	email: string;
+	isVerifiedEmail: boolean;
 	encryptedOauthAccessToken: string;
 	encryptedOauthAccessTokenIv: string;
 	fullName: string | null;

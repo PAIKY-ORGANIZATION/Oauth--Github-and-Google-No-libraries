@@ -20,15 +20,22 @@ export const getGithubUserDataByToken = async(access_token: string)=>{
 
     //* =====================================  Parse the user data    =========================================
 
-	const verifiedEmail = emailData.find(
-		(emailObject) => emailObject.verified === true
-	)?.email;
+    //% The Github response for emails:
+    //% 1. Can include both verified and unverified emails.
+    //% 2. Can include more than two emails, depending on how many the user has added to their GitHub account.
+    
+    const primaryVerifiedEmail = emailData.find((emailObj) => emailObj.verified)?.email;
+    const fallbackEmail = emailData.find((emailObj) => !emailObj.verified)?.email;
 
-    if(!verifiedEmail) throw new BadRequest('No verified email found')
+    const email = primaryVerifiedEmail || fallbackEmail;
+    const isVerifiedEmail = primaryVerifiedEmail !== undefined;
 
-    const user = {
+    if(!email) throw new BadRequest('No email found')
+
+    const user = { //* we use this specific structure so that it is compatible with Prisma "storeUser()" 
         username: userData.login,
-        email: verifiedEmail,
+        email,
+        isVerifiedEmail,
         imageURL: userData.avatar_url,
         fullName: userData.name,
         oauthProviderId: userData.id
