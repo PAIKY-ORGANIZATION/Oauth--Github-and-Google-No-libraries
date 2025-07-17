@@ -16,12 +16,12 @@ datasource db {
 
 model User {
     id              String  @id @default(uuid())
-    userName        String  @map("user_name")
+    username        String  @map("user_name")
     hash            String? //$ Optional if the user signs up with OAuth
     oauthProvider   String? @map("oauth_provider") //$ Optional if the user signs up with OAuth
-    oauthProviderId String? @map("oauth_provider_id") //$ Example: Github ID, Google ID
+    oauthProviderId Int? @map("oauth_provider_id") //$ Example: Github ID, Google ID
     email           String?
 	oauthEncryptedAccessToken String? @map("oauth_encrypted_access_token") // We might need this even though we already have email. username, etc. Maybe for updates, getting user's repos, etc.
-    imageURL String? @map("image_url")
     fullName String? @map("full_name")
+    imageURL String? @map("image_url")
 }

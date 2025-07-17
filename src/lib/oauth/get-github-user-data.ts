@@ -1,11 +1,12 @@
 import axios from 'axios';
+import { BadRequest } from 'custom-exceptions-express';
 
 
 
 export const getGithubUserData = async(code: string)=>{
 
     
-	const response = await axios.post(
+	const response = await axios.post<{ access_token: string }>(
 		'https://github.com/login/oauth/access_token',
 		{
 			client_id: process.env.GITHUB_CLIENT_ID,
@@ -41,11 +42,16 @@ export const getGithubUserData = async(code: string)=>{
 		(emailObject) => emailObject.verified === true
 	)?.email;
 
+    if(!verifiedEmail){
+        throw new BadRequest('No verified email found')
+    }
+
     const user = {
         username: userData.login,
         email: verifiedEmail,
         imageURL: userData.avatar_url,
-        fullName: userData.name
+        fullName: userData.name,
+        oauthProviderId: userData.id
     }
 
 

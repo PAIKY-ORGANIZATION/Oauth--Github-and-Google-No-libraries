@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getGithubUserData } from '../../lib/oauth/get-github-user-data.js';
 import { BadRequest } from 'custom-exceptions-express';
-import { storeUser } from '../../lib/prisma/store-user.js';
+import { storeUser } from '../../lib/prisma/store-oauth-user.js';
 
 export const githubCallback = async (req: Request, res: Response) => {
 
@@ -10,10 +10,21 @@ export const githubCallback = async (req: Request, res: Response) => {
 	if(!code){
 		throw new BadRequest('Missing Github code')
 	}
-
-	const {access_token, user} = await getGithubUserData(code) //?
+	//@ts-ignore
+	const {access_token, user} = await getGithubUserData(code) //? TYPE ERROR HERE
 	
-	const user = await storeUser()
+	const savedUser = await storeUser({
+		oauthEncryptedAccessToken: access_token,
+		oauthProvider: 'github',
+		...user
+	})
 
-	res.send('Success');
+
+	const response: ServerResponse = {
+		message: 'User created successfully',
+		success: true,
+		data: savedUser
+	}
+
+	res.send(response);
 };
