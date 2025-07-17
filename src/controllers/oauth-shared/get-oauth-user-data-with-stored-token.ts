@@ -1,10 +1,15 @@
-//% This file focuses on using decryption to reuse the encrypted authorization token to refetch user data from GitHub.
 import { Request, Response } from 'express';
 import { getUserById } from '../../lib/prisma/get-user-by-id.js';
 import { Unauthorized } from 'custom-exceptions-express';
 import { decrypt } from '../../lib/encrypt.js';
 import { getGithubUserDataByToken } from '../../lib/oauth/github/get-github-user-data.js';
 import { getGoogleAccessTokenByCode } from '../../lib/oauth/google/get-access-token-with-code.js';
+
+
+//! This DOES NOT focus on retrieving the stored user from the database to get their information
+//% This file focuses on using decryption to reuse the encrypted authorization token to REFETCH user data from GitHub.
+//% ➡️➡️➡️ It might be the case that the user information has updated in GitHub.
+
 
 export const getUserDataWithStoredTokenController = async(req: Request, res: Response)=>{
     const {userId} = (req as any).userId //$ Assuming that authorization middleware was successful.
