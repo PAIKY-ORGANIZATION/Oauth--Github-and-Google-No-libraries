@@ -20,3 +20,6 @@ export const getGithubAccessTokenByCode = async(code: string)=>{
 	const { access_token } = response.data;
     return access_token
 }
+
+
+

@@ -12,15 +12,15 @@ export const getGithubUserData = async(access_token: string)=>{
 		headers: { Authorization: 'Bearer ' + access_token },
 	});
 
-	const emailRes = await axios.get<GitHubEmailResponse>('https://api.github.com/user/emails', {
+	//$ This gives an array of email-objects
+	const {data: emailData} = await axios.get<GitHubEmailResponse>('https://api.github.com/user/emails', {
 		headers: { Authorization: 'Bearer ' + access_token },
 	});
 
 
     //* =====================================  Parse the user data    =========================================
-	const emailsArray = emailRes.data;
 
-	const verifiedEmail = emailsArray.find(
+	const verifiedEmail = emailData.find(
 		(emailObject) => emailObject.verified === true
 	)?.email;
 
@@ -36,3 +36,5 @@ export const getGithubUserData = async(access_token: string)=>{
 
     return {user, access_token}
 }
+
+
