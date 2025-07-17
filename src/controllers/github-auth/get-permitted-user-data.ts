@@ -4,6 +4,7 @@
 import { Request, Response } from 'express';
 import { getUserById } from '../../lib/prisma/get-user-by-id.js';
 import { Unauthorized } from 'custom-exceptions-express';
+import { decrypt } from '../../lib/encrypt.js';
 
 export const getPermittedUserData = async(req: Request, res: Response)=>{
     const {userId} = (req as any).userId //$ Assuming that authorization middleware was successful.
@@ -12,5 +13,10 @@ export const getPermittedUserData = async(req: Request, res: Response)=>{
 
     if(!user) throw new Unauthorized('User not associated with this JWT token.')
     
-    const accessToken = 
+    if(!user.encryptedOauthAccessToken) throw new Unauthorized('Oauth access token not found.')
+
+    const decryptedAccessToken = decrypt(user.encryptedOauthAccessToken)
+
+    res.send(decryptedAccessToken)
+
 }

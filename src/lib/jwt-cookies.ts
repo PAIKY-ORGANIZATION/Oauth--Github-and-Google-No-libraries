@@ -17,7 +17,7 @@ export const generateJwtAndAddToResponse = (userId: string, res: Response)=>{
 }
 
 export const getJwtFromRequestAndVerify = (req: Request)=>{
-    const token: string | undefined = req.cookies.SERVER_JWT
+    const token: string | undefined = req.cookies['SERVER_JWT']
 
     if(!token) throw new Unauthorized('Missing token')
 
