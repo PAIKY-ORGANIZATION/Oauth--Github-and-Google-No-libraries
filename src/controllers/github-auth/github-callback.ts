@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { getGithubUserData } from '../../lib/oauth/get-github-user-data.js';
+import { getGithubUserData } from '../../lib/oauth/github/get-github-user-data.js';
 import { BadRequest } from 'custom-exceptions-express';
 import { storeUser } from '../../lib/prisma/store-oauth-user.js';
 import { encrypt } from '../../lib/encrypt.js';
 import { generateJwtAndAddToResponse } from '../../lib/jwt-cookies.js';
-import { getGithubAccessTokenByCode } from '../../lib/oauth/get-access-token-with-code.js';
+import { getGithubAccessTokenByCode } from '../../lib/oauth/github/get-access-token-with-code.js';
 
 //% In this controller:
 //% 1. We get the code from GitHub
