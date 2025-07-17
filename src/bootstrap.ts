@@ -12,7 +12,7 @@ const setENV = ()=>{
 
 
      //* Check for required environment variables or throw stop execution.   
-    const requiredVars = ['PORT', 'GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'ENCRYPTION_KEY']
+    const requiredVars = ['PORT', 'GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'ENCRYPTION_KEY', 'JWT_SECRET']
 
     requiredVars.forEach((varName)=>{
         if(!process.env[varName]){
