@@ -42,9 +42,7 @@ export const getGithubUserData = async(code: string)=>{
 		(emailObject) => emailObject.verified === true
 	)?.email;
 
-    if(!verifiedEmail){
-        throw new BadRequest('No verified email found')
-    }
+    if(!verifiedEmail) throw new BadRequest('No verified email found')
 
     const user = {
         username: userData.login,

@@ -7,21 +7,21 @@ type User = {
 	oauthProvider: string;
 	oauthProviderId: number;
 	email: string;
-	oauthEncryptedAccessToken: string;
+	encryptedOauthAccessToken: string;
 	fullName: string | null;
 	imageURL?: string;
 };
 
 
 // prettier-ignore
-export const storeUser = async ({ username, oauthProvider, oauthProviderId, email, oauthEncryptedAccessToken, fullName, imageURL, } : User) => {
+export const storeUser = async ({ username, oauthProvider, oauthProviderId, email, encryptedOauthAccessToken, fullName, imageURL, } : User) => {
 	const user = await prisma.user.create({
 		data: { 
 			username,
 			oauthProvider,
 			oauthProviderId,
 			email,
-			oauthEncryptedAccessToken,
+			encryptedOauthAccessToken,
 			fullName,
 			imageURL
 		},
