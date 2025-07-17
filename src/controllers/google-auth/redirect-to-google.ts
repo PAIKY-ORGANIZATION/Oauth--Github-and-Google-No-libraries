@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-export const redirectToGoogle = async(req: Request, res: Response)=>{
+export const redirectToGoogle = async(_req: Request, res: Response)=>{
     
     const googleClientId = process.env.GOOGLE_CLIENT_ID
 

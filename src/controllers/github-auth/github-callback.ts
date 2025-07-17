@@ -2,6 +2,12 @@ import { Request, Response } from 'express';
 import axios from 'axios';
 
 export const githubCallback = async (req: Request, res: Response) => {
+
+
+
+	
+
+
 	const code = req.query.code; //$ this code can only be used once.
 
 	const response = await axios.post(
