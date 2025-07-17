@@ -1,5 +1,43 @@
 //% This file focuses on using decryption to reuse the encrypted authorization token to refetch user data from GitHub.
 
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
+//¡ TRY THIS
 
 import { Request, Response } from 'express';
 import { getUserById } from '../../lib/prisma/get-user-by-id.js';
@@ -15,7 +53,7 @@ export const getPermittedUserData = async(req: Request, res: Response)=>{
     
     if(!user.encryptedOauthAccessToken) throw new Unauthorized('Oauth access token not found.')
 
-    const decryptedAccessToken = decrypt(user.encryptedOauthAccessToken)
+    const decryptedAccessToken = decrypt(user.encryptedOauthAccessToken, user.encryptedOauthAccessTokenIv!)
 
     res.send(decryptedAccessToken)
 

@@ -5,8 +5,7 @@ export const googleCallback = async(req: Request, res: Response)=>{
 
     const redirectUri = "http://localhost:3001/api/auth/google/callback"
 
-
-
+    //* ========================================  Get the access token    ===========================================
 
     const tokenResponse = await axios.post(`https://oauth2.googleapis.com/token`, {
         code,
@@ -18,6 +17,8 @@ export const googleCallback = async(req: Request, res: Response)=>{
     
     const {access_token} = tokenResponse.data
 
+    //* =============================  With the access token, get the user data    ==================================
+    
     const userResponse = await axios.get('https://www.googleapis.com/oauth2/v2/userinfo', {
         headers: {
             Authorization: 'Bearer ' + access_token
@@ -25,6 +26,5 @@ export const googleCallback = async(req: Request, res: Response)=>{
     })
 
 
-    console.log(userResponse.data)
-    res.send('Success')
+    res.send(userResponse.data)
 }

@@ -4,21 +4,24 @@ import { BadRequest } from 'custom-exceptions-express';
 import { storeUser } from '../../lib/prisma/store-oauth-user.js';
 import { encrypt } from '../../lib/encrypt.js';
 import { generateJwtAndAddToResponse } from '../../lib/jwt-cookies.js';
+import { getGithubAccessToken } from '../../lib/oauth/get-access-token-with-code.js';
 
 export const githubCallback = async (req: Request, res: Response) => {
 
 	//* Get the code that was sent by GitHub. We use this to get the access token.
-	const code = req.query.code; //$ this code can only be used once.
+	const code = req.query.code?.toString(); //$ this code can only be used once.
 	if(!code)throw new BadRequest('Missing Github code') 
 
-	//@ts-ignore
-	//* Send the code to GitHub to get the access token and then use the access token to get the user data in exchange.
-	const {access_token, user} = await getGithubUserData(code) //! TYPE ERROR HERE
+	//* Get the access token with the code
+	const accessToken  = await getGithubAccessToken(code)
+
+
+	//* Send the access token to get the user data in exchange.
+	const {access_token, user} = await getGithubUserData(accessToken) 
 	
-	//* Encrypt the access token
+	//* Encrypt the access token before storing it
 	const {encrypted: encryptedOauthAccessToken, iv: encryptedOauthAccessTokenIv} = encrypt(access_token)
 	
-
 	//* Store the user in Prisma
 	const savedUser = await storeUser({
 		encryptedOauthAccessToken,
