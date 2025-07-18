@@ -19,7 +19,6 @@ router.get('/auth/github', validate(redirectToGithub)) //$ ✅ Touched directly 
 router.get('/auth/github/callback', validate(githubCallbackController)) //$ ❌ No touched directly by clients
 
 
-
 //* Google
 router.get('/auth/google', redirectToGoogle) //$ ✅ Touched directly by clients
 router.get('/auth/google/callback', googleCallbackController) //$ ❌ No touched directly by clients
