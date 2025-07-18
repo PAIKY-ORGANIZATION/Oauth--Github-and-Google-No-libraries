@@ -58,5 +58,7 @@ export const sharedOauthCallbackController = async (
 		data: savedUser,
 	};
 
-	res.send(response);
+
+	//$ If this argument starts with a slash it redirects to a relative route.
+	res.redirect('/home');
 };

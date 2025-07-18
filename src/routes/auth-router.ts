@@ -14,6 +14,9 @@ import { getUserDataWithStoredTokenController } from "../controllers/oauth-share
 
 export const router = Router();
 
+
+
+
 //* Github:
 router.get('/auth/github', validate(redirectToGithub)) //$ ✅ Touched directly by clients
 router.get('/auth/github/callback', validate(githubCallbackController)) //$ ❌ No touched directly by clients
@@ -28,3 +31,7 @@ router.get('/auth/google/callback', googleCallbackController) //$ ❌ No touched
 
 //* ONLY ONE FOR THE TWO
 router.get('/users/data-from-stored-token', authorization, validate(getUserDataWithStoredTokenController)) //$ ✅ Touched directly by clients
+
+
+//! This is for development without a front end. 
+router.get('/home', (_req, res)=>{res.send('You are at home!')})
