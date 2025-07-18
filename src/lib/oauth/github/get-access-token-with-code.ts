@@ -5,8 +5,8 @@ export const getGithubAccessTokenByCode = async(code: string)=>{
 	const response = await axios.post<{ access_token: string }>(
 		'https://github.com/login/oauth/access_token',
 		{
-			client_id: process.env.GITHUB_CLIENT_ID,
-			client_secret: process.env.GITHUB_CLIENT_SECRET,
+			client_id: process.env.CLIENT_ID_GITHUB,
+			client_secret: process.env.CLIENT_SECRET_GITHUB,
 			code,
 		},
 		{

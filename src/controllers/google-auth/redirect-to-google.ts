@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 export const redirectToGoogle = async(_req: Request, res: Response)=>{
     
-    const googleClientId = process.env.GOOGLE_CLIENT_ID
+    const googleClientId = process.env.CLIENT_ID_GOOGLE
 
     const redirectUri = "http://localhost:3001/api/auth/google/callback"
 
