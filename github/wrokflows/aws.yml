@@ -33,4 +33,19 @@ jobs:
             git fetch
             git merge origin/master
 
+            echo "CLIENT_ID_GITHUB=${{secrets.CLIENT_ID_GITHUB}}" >> ./config/shared.env
+            echo "CLIENT_SECRET_GITHUB=${{secrets.CLIENT_SECRET_GITHUB}}" >> ./config/shared.env
+            echo "CLIENT_SECRET_GOOGLE=${{secrets.CLIENT_SECRET_GOOGLE}}" >> ./config/shared.env
+            echo "CLIENT_ID_GOOGLE=${{secrets.CLIENT_ID_GOOGLE}}" >> ./config/shared.env
+
+
+
+            echo "ENCRYPTION_KEY=${{secrets.ENCRYPTION_KEY}}" >> ./config/shared.env
+            echo "JWT_SECRET=${{secrets.JWT_SECRET}}" >> ./config/shared.env
+
+
+
+            sudo docker compose down
+            sudo docker compose up --build
+
             

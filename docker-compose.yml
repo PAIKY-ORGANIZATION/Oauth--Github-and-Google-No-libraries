@@ -3,6 +3,32 @@ services:
     build: .
     ports:
       - "3001:3001"
-    command: npm run dev_docker
+    command: sh -c "npx prisma migrate reset --force && npx prisma generate && npx prisma migrate dev && npm run dev_docker"
     volumes:
       - "./src:/app/src" #! Not readonly.   Avoid it if you plan on using prisma which generates the client in the src folder. 
+    depends_on:
+      - db
+    env_file:
+      - ./prisma/docker.env #$ Correctly set db connection on docker container for db
+
+
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: oauth
+    volumes:
+      - paiky_data:/var/lib/postgresql/data
+
+
+
+
+
+
+
+volumes:
+  paiky_data:
+
