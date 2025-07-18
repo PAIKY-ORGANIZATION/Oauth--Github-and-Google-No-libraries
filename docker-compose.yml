@@ -15,7 +15,7 @@ services:
   db:
     image: postgres
     ports:
-      - "5432:5432"
+      - "5433:5432" #% Added + 1 because there is another postgres db on AWS
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
