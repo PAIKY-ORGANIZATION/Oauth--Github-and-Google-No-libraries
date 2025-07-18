@@ -25,5 +25,6 @@ router.get('/auth/google/callback', googleCallbackController) //$ ❌ No touched
 
 
 
+
 //* ONLY ONE FOR THE TWO
 router.get('/users/data-from-stored-token', authorization, validate(getUserDataWithStoredTokenController)) //$ ✅ Touched directly by clients
