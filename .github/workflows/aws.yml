@@ -34,8 +34,8 @@ jobs:
             git merge origin/master
 
                     #* ===================== Why is Google one in shared and Github one is specific to environments?
-            #$ Github Oauth apps. only allow you up to one callback URL. 
-            #$ Google Oauth apps. allow you to set up multiple callback URLs. I can use the same callback URL for both local and deployment.
+            #! ⚠️ Read readme under " Multiple Github apps and a single Google  app" 
+            
 
             #* Github App
             echo "CLIENT_ID_GITHUB=${{secrets.CLIENT_ID_GITHUB}}" >> ./config/docker_aws.env
