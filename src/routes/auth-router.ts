@@ -6,6 +6,7 @@ import { authorization } from "../middleware/authorization.js";
 import { githubCallbackController } from "../controllers/github-auth/github-callback.js";
 import { googleCallbackController } from "../controllers/google-auth/google-callback.js";
 import { getUserDataWithStoredTokenController } from "../controllers/oauth-shared/get-oauth-user-data-with-stored-token.js";
+import { CALLBACK_PATH_GITHUB, CALLBACK_PATH_GOOGLE } from "../lib/variables.js";
 //*types:
 
 
@@ -19,12 +20,14 @@ export const router = Router();
 
 //* Github:
 router.get('/auth/github', validate(redirectToGithub)) //$ ✅ Touched directly by clients
-router.get('/auth/github/callback', validate(githubCallbackController)) //$ ❌ No touched directly by clients
+//! CALLBACK_PATH_GITHUB must match the one in redirect-to-github.ts and the one set on Github app 
+router.get(CALLBACK_PATH_GITHUB, validate(githubCallbackController)) //$ ❌ No touched directly by clients
 
 
 //* Google
 router.get('/auth/google', validate(redirectToGoogle)) //$ ✅ Touched directly by clients
-router.get('/auth/google/callback', googleCallbackController) //$ ❌ No touched directly by clients
+//! CALLBACK_PATH_GOOGLE must match the one in redirect-to-google.ts and the one set on Google app 
+router.get(CALLBACK_PATH_GOOGLE, googleCallbackController) //$ ❌ No touched directly by clients
 
 
 
