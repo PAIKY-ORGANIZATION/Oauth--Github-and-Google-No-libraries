@@ -9,6 +9,8 @@ export const redirectToGoogle = async(_req: Request, res: Response)=>{
     //! This same one must be used in the router. Router by def. starts with "/api"
     const redirectUri = redirectUriBase + '/api' + CALLBACK_PATH_GOOGLE //$ Looks like "http://localhost:3001 + /api/auth/google/callback" 
 
+    console.log({redirectUri});
+    
     
     
     const googleClientId = process.env.CLIENT_ID_GOOGLE 
