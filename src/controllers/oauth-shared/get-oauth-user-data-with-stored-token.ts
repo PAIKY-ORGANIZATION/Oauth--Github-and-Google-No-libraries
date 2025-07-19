@@ -42,3 +42,4 @@ export const getUserDataWithStoredTokenController = async(req: Request, res: Res
     res.send(response)
 
 }
+

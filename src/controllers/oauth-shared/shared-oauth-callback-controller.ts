@@ -36,10 +36,7 @@ export const sharedOauthCallbackController = async (
 	const user = await getOauthUserDataByToken(accessToken);
 
 	//* Encrypt the access token before storing it
-	const {
-		encrypted: encryptedOauthAccessToken,
-		iv: encryptedOauthAccessTokenIv,
-	} = encrypt(accessToken);
+	const { encrypted: encryptedOauthAccessToken, iv: encryptedOauthAccessTokenIv,} = encrypt(accessToken);
 
 	//* Store the user in Prisma
 	const savedUser = await storeUser({
@@ -60,5 +57,5 @@ export const sharedOauthCallbackController = async (
 
 
 	//$ If this argument starts with a slash it redirects to a relative route.
-	res.redirect('/home');
+	res.send(response);
 };

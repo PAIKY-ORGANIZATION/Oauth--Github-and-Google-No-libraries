@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser())
 
-//Custom middleware
+//* Custom middleware
 app.use(reqLogger as RequestHandler)
 //Routes
 app.use('/api',  usersRouter);
@@ -19,8 +19,8 @@ app.use('/api',  loggerRouter);
 
 
 
-//Error Middleware
+//* Error Middleware
 app.use(errorMiddleware) // Optional, recommended
 
-// I exported the app for testing in vitest without running the server:
+//* I exported the app for testing in vitest without running the server:
 export default app
