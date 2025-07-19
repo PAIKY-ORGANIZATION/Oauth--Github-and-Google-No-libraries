@@ -25,6 +25,7 @@ router.get(CALLBACK_PATH_GITHUB, validate(githubCallbackController)) //$ ❌ No 
 
 
 //* Google
+//¡ If you already have an account, for some reason Google doesn't send you the  "User already exists" message. The requests pends forever
 router.get('/auth/google', validate(redirectToGoogle)) //$ ✅ Touched directly by clients
 //! CALLBACK_PATH_GOOGLE must match the one in redirect-to-google.ts and the one set on Google app 
 router.get(CALLBACK_PATH_GOOGLE, googleCallbackController) //$ ❌ No touched directly by clients
