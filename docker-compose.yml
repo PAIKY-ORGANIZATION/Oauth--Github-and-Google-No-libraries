@@ -3,7 +3,7 @@ services:
     build: .
     ports:
       - "3007:3001"
-    command: sh -c "npx prisma migrate reset --force && npx prisma generate && npx prisma migrate dev && npm run dev_docker"
+    command: sh -c "npx prisma migrate reset --force && npx prisma generate && npx prisma migrate dev && npm run dev_docker_aws"
     volumes:
       - "./src:/app/src" #! Not readonly.   Avoid it if you plan on using prisma which generates the client in the src folder. 
     depends_on:
