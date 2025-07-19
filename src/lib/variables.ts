@@ -1,6 +1,6 @@
 
 //* Github
-export const CALLBACK_PATH_GITHUB = "/api/auth/github/callback"
+export const CALLBACK_PATH_GITHUB = "/auth/github/callback"
 
 //* Google
-export const CALLBACK_PATH_GOOGLE = "/api/auth/github/callback"
+export const CALLBACK_PATH_GOOGLE = "/auth/github/callback"
