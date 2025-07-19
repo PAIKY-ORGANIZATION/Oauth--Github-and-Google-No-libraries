@@ -33,13 +33,22 @@ jobs:
             git fetch
             git merge origin/master
 
-            echo "CLIENT_ID_GITHUB=${{secrets.CLIENT_ID_GITHUB}}" >> ./config/shared.env
-            echo "CLIENT_SECRET_GITHUB=${{secrets.CLIENT_SECRET_GITHUB}}" >> ./config/shared.env
+                    #* ===================== Why is Google one in shared and Github one is specific to environments?
+            #$ Github Oauth apps. only allow you up to one callback URL. 
+            #$ Google Oauth apps. allow you to set up multiple callback URLs. I can use the same callback URL for both local and deployment.
+
+            #* Github App
+            echo "CLIENT_ID_GITHUB=${{secrets.CLIENT_ID_GITHUB}}" >> ./config/docker_aws.env
+            echo "CLIENT_SECRET_GITHUB=${{secrets.CLIENT_SECRET_GITHUB}}" >> ./config/docker_aws.env
+            
+            #* Google App
             echo "CLIENT_SECRET_GOOGLE=${{secrets.CLIENT_SECRET_GOOGLE}}" >> ./config/shared.env
             echo "CLIENT_ID_GOOGLE=${{secrets.CLIENT_ID_GOOGLE}}" >> ./config/shared.env
 
+            #* AWS deployment-specific
+            echo "LOCAL_SERVER_BASE_URL=${{vars.LOCAL_SERVER_BASE_URL}}" >> ./config/docker_aws.env
 
-
+            #* Other
             echo "ENCRYPTION_KEY=${{secrets.ENCRYPTION_KEY}}" >> ./config/shared.env
             echo "JWT_SECRET=${{secrets.JWT_SECRET}}" >> ./config/shared.env
 

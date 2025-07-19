@@ -7,7 +7,7 @@
         "build": "tsc",
         "test": "ENVIRONMENT=test vitest",
         "dev_local": "ENVIRONMENT=local npx nodemon",
-        "dev_docker": "ENVIRONMENT=docker npx nodemon"
+        "dev_docker_aws": "ENVIRONMENT=docker_aws npx nodemon"
     },
     "keywords": [],
     "author": "",

@@ -4,3 +4,5 @@ dist
 request-log.txt
 /src/generated/prisma
 config/shared.env
+config/docker_aws.env
+config/local.env
