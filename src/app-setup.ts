@@ -1,18 +1,18 @@
 import './bootstrap.js' // This  needs to be imported at the top in order for environment variables to be loaded successfully.
 
-import express, { RequestHandler} from 'express';
+import express from 'express';
 import { router as usersRouter } from './routes/auth-router.js';
 import { router as loggerRouter } from './routes/logger-router.js';
-import {reqLogger} from 'req-logger-express'
 import {errorMiddleware} from 'custom-exceptions-express'
 import cookieParser from 'cookie-parser'
+import reqLoggerExpress from 'req-logger-express';
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser())
 
 //* Custom middleware
-app.use(reqLogger as RequestHandler)
+app.use(reqLoggerExpress('Oauth_API'))
 //Routes
 app.use('/api',  usersRouter);
 app.use('/api',  loggerRouter);
