@@ -36,7 +36,7 @@ jobs:
                     #* ===================== Why is Google one in shared and Github one is specific to environments?
             #! ⚠️ Read readme under " Multiple Github apps and a single Google  app" 
             
-
+            rm ./config/shared.env || true #* Delete previous environment variables for safety
             #* Github App
             echo "CLIENT_ID_GITHUB=${{secrets.CLIENT_ID_GITHUB}}" >> ./config/docker_aws.env
             echo "CLIENT_SECRET_GITHUB=${{secrets.CLIENT_SECRET_GITHUB}}" >> ./config/docker_aws.env
