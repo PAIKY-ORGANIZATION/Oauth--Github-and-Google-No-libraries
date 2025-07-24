@@ -14,11 +14,17 @@ import { getGoogleAccessTokenByCode } from '../../lib/oauth/google/get-access-to
 export const getUserDataWithStoredTokenController = async(req: Request, res: Response)=>{
     const {userId} = (req as any).userId //$ Assuming that authorization middleware was successful.
 
+
+    console.log('TEST 1');
+    
+
     const user = await getUserById(userId)
 
     if(!user) throw new Unauthorized('User not associated with this JWT token.')
     
     if(!user.encryptedOauthAccessToken) throw new Unauthorized('Oauth access token not found.')
+
+    console.log('TEST 2');
 
     const oauthProviderName = user.oauthProvider as 'github' | 'google'
 
@@ -30,6 +36,10 @@ export const getUserDataWithStoredTokenController = async(req: Request, res: Res
         oauthProviderName === 'github' ?
         getGithubUserDataByToken :
         getGoogleAccessTokenByCode
+
+
+    console.log('TEST 3');
+
 
     const userData = await getOauthUserDataByTokenFunction(decryptedAccessToken)
 

@@ -43,5 +43,6 @@ export const storeUser = async ({ username, oauthProvider, oauthProviderId, emai
 		},
 	});
 
-	return user
+
+	return user //$ We can safely send this user back to the client because the token is encrypted.
 };

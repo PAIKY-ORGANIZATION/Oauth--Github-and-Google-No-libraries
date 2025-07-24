@@ -38,7 +38,5 @@ router.get('/users/data-from-stored-token', validate(authorization), validate(ge
 
 //! This is for development without a front end. 
 router.get('/home', (_req, res)=>{
-    console.log('Test');
-    
     res.send('You are at home!')
 })

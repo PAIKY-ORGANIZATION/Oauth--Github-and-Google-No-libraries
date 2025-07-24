@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { AnyZodObject, ZodError } from 'zod';
 import { AppError, InternalException, UnprocessableEntity } from 'custom-exceptions-express';
-import {AxiosError} from 'axios';  
 //prettier-ignore
 type ControllerFunction = (req: Request<any>, res: Response,next: NextFunction) => Promise<void>;
 
@@ -18,6 +17,7 @@ export const validate = (controller: ControllerFunction, schema?: AnyZodObject, 
 			await controller(req, _res, next);
 
 			next();
+			
 		} catch (e) {
 			
 			console.log(e);
