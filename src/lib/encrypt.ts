@@ -1,8 +1,8 @@
 
-import { createCipheriv, createDecipheriv } from 'node:crypto'
+import { createCipheriv, createDecipheriv, randomBytes } from 'node:crypto'
 
 
-//% The initialization vector (IV) must be random, per-encryption-unique and can be public.
+//% The initialization vector (IV) must be RANDOM, per-encryption-unique and can be public.
 //% It ensures that the same plaintext will always produce different ciphertexts, avoiding "guessing" because of repetitive patterns.
 //% it's usually publicly sent along with encrypted communication; In this case we will store it in the database.
 
@@ -13,9 +13,10 @@ const key = Buffer.from(process.env.ENCRYPTION_KEY!, 'hex')
 
 export const encrypt = (authToken: string)=>{
     
-    const iv =  Buffer.from('A1B2C3D4E5F6G7H8', 'utf-8') // - Read the top 
+    const iv =  randomBytes(16) // - Read the top 
 
     const cipher = createCipheriv('aes-256-cbc', key, iv)
+
 
     const encrypted = cipher.update(authToken, 'utf-8', 'hex') + cipher.final('hex')
 

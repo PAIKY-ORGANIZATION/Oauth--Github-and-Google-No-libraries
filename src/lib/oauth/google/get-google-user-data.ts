@@ -9,7 +9,7 @@ export const getGoogleUserDataByToken = async(accessToken: string)=>{
     })
 
 
-    const user = {   //* we use this specific structure so that it is compatible with Prisma "storeUser()" 
+    const user: UserReturnedByTokenUse = {   //* we use this specific structure so that it is compatible with Prisma "storeUser()" 
         username: data.given_name,
         email: data.email,
         isVerifiedEmail: data.verified_email, //* Boolean

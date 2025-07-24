@@ -14,3 +14,5 @@ export const redirectToGithub = async(_req: Request, res: Response)=>{
 
     //% Set "scope=user:email" to receive both the user and email information.
 }
+
+

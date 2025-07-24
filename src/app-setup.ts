@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cookieParser())
 
 //* Custom middleware
-app.use(reqLoggerExpress('Oauth_API'))
+app.use(reqLoggerExpress('Oauth_API')) //* This appName will be saved in Postgres
 //Routes
 app.use('/api',  usersRouter);
 app.use('/api',  loggerRouter);
